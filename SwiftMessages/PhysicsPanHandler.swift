@@ -64,8 +64,8 @@ open class PhysicsPanHandler {
     weak var animator: Animator?
     weak var messageView: UIView?
     weak var containerView: UIView?
-    var state: State?
-    private(set) var isOffScreen = false
+    private(set) public var state: State?
+    private(set) public var isOffScreen = false
 
     public init(context: AnimationContext, animator: Animator) {
         messageView = context.messageView
