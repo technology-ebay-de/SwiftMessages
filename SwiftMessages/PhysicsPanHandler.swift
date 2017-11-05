@@ -31,7 +31,7 @@ open class PhysicsPanHandler {
         var time: CFAbsoluteTime = 0
         var angle: CGFloat = 0
 
-        init(messageView: UIView, containerView: UIView) {
+        public init(messageView: UIView, containerView: UIView) {
             self.messageView = messageView
             self.containerView = containerView
             let dynamicAnimator = UIDynamicAnimator(referenceView: containerView)
