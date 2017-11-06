@@ -52,8 +52,4 @@ class WindowViewController: UIViewController
     override public var preferredStatusBarStyle: UIStatusBarStyle {
         return config.preferredStatusBarStyle ?? UIApplication.shared.statusBarStyle
     }
-    
-    override var prefersStatusBarHidden: Bool {
-        return UIApplication.shared.isStatusBarHidden
-    }
 }
