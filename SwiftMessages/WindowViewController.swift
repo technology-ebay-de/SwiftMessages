@@ -50,6 +50,6 @@ class WindowViewController: UIViewController
     }
     
     override public var preferredStatusBarStyle: UIStatusBarStyle {
-        return config.preferredStatusBarStyle ?? UIApplication.shared.statusBarStyle
+        return config.preferredStatusBarStyle ?? super.preferredStatusBarStyle
     }
 }
