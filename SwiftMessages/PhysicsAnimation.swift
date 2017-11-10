@@ -25,6 +25,8 @@ public class PhysicsAnimation: NSObject, Animator {
 
     public override init() {}
 
+    public override init() {}
+
     init(delegate: AnimationDelegate) {
         self.delegate = delegate
     }
