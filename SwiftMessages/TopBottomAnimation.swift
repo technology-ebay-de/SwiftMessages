@@ -19,6 +19,10 @@ public class TopBottomAnimation: NSObject, Animator {
 
     open let style: Style
 
+    public var animateShow: ((_ alongsideContext: AnimationContext, _ duration: TimeInterval) -> Void)?
+
+    public var animateHide: ((_ alongsideContext: AnimationContext, _ duration: TimeInterval) -> Void)?
+
     open var closeSpeedThreshold: CGFloat = 750.0;
 
     open var closePercentThreshold: CGFloat = 33.0;
@@ -49,9 +53,11 @@ public class TopBottomAnimation: NSObject, Animator {
         let view = context.messageView
         let container = context.containerView
         self.context = context
-        UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
+        let duration: TimeInterval = 0.2
+        UIView.animate(withDuration: duration, delay: 0, options: [.beginFromCurrentState, .curveEaseIn], animations: {
             let size = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
             self.translationConstraint.constant -= size.height
+            self.animateHide?(self.context!, duration)
             container.layoutIfNeeded()
         }, completion: { completed in
             // Fix #131 by always completing if application isn't active.
@@ -131,8 +137,10 @@ public class TopBottomAnimation: NSObject, Animator {
         // Cap the initial velocity at zero because the bounceOffset may not be great
         // enough to allow for greater bounce induced by a quick panning motion.
         let initialSpringVelocity = animationDistance == 0.0 ? 0.0 : min(0.0, closeSpeed / animationDistance)
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: initialSpringVelocity, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
+        let duration: TimeInterval = 0.4
+        UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: initialSpringVelocity, options: [.beginFromCurrentState, .curveLinear, .allowUserInteraction], animations: {
             self.translationConstraint.constant = -self.bounceOffset
+            self.animateShow?(self.context!, duration)
             container.layoutIfNeeded()
         }, completion: { completed in
             // Fix #131 by always completing if application isn't active.
