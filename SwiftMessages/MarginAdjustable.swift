@@ -29,5 +29,8 @@ public protocol MarginAdjustable {
     var safeAreaTopOffset: CGFloat { get set }
     /// Safe area bottom adjustment in iOS 11+
     var safeAreaBottomOffset: CGFloat { get set }
+    /// To enable custom bottom offset
+    var customBottomOffset: CGFloat { get set }
+
 }
 
